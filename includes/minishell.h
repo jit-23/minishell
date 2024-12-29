@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 05:59:56 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 16:57:04 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 21:42:18 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ struct					s_cmd
 struct					s_exec
 {
 	int					type;
-	char				*args[200];
+	char				*args[4096];
+	char				*cmd;
 	int					first_cmd;
 };
 
