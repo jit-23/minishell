@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 06:13:01 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/28 06:57:48 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 21:42:59 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	delete_exec(t_exec *ex)
 	int	i;
 
 	i = 1;
+	if (ex->cmd)
+		free(ex->cmd);
 	if (!ex->args[0])
 	{
 		free(ex);

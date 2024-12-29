@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:08:42 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/28 05:59:47 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 22:50:02 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	get_prompt(t_shell *shell)
 
 	dir = NULL;
 	dir = getcwd(dir, 100);
-	shell->prompt = ft_strjoin(dir, "$ ");
+	shell->prompt = ft_strjoin(dir, "MINISHELL$ ");
 	shell->cmd_line = readline(shell->prompt);
 	if (shell->cmd_line && shell->cmd_line[0] != 0)
 		add_history(shell->cmd_line);
@@ -56,8 +56,6 @@ void	init_shell(t_shell *shell, char **ev)
 	shell->token_list->official_head = NULL;
 	shell->rl->head = NULL;
 	shell->rl->official_head = NULL;
-	shell->in = dup(STDIN);
-	shell->out = dup(STDOUT);
 	shell->ret = 0;
 	shell->heredoc_tmp_file = 65;
 	shell->heredoc_flag = 0;

@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:01:05 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 15:38:18 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 21:49:28 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	run_cmd(t_shell *sh, t_exec *ex)
 	if (pid1 == 0)
 	{
 		setcs();
-		if (execve(ex->args[0], ex->args, sh->env) == -1)
+		if (execve(ex->cmd, ex->args, sh->env) == -1)
 			run_cmd_exit_msg(sh, ex->args[0]);
 	}
 	else

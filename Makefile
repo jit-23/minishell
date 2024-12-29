@@ -81,6 +81,9 @@ clean:
 		@rm -fr ${OBJ_PATH}
 		@echo "${RED}object files and directory deleted:${default_colour}"
 
+valgrind: ${NAME}
+			valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all ./minishell
+
 fclean: clean
 		${MAKE} ${LIBFT_DIR} fclean
 		@rm -f ${NAME}

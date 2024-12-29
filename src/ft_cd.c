@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:52:23 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 16:00:51 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:15:13 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 void	execute_cd(t_shell *sh, t_exec *ex)
 {
-	char	old_pwd[1000];
+	char	*old_pwd;
 
-	getcwd(old_pwd, 1000);
+	old_pwd = NULL;
+	old_pwd = getcwd(old_pwd, 1000);
 	if (chdir(ex->args[1]) == -1)
 	{
 		ft_putstr_fd(2, "cd : ");
 		ft_putstr_fd(2, ex->args[1]);
 		ft_putstr_fd(2, ": No such file or directory\n");
 		g_sign = 1;
+		free(old_pwd);
 		return ;
 	}
 	update_pwds(sh, old_pwd);
+	if (old_pwd)
+		free(old_pwd);
 	g_sign = 0;
 }
 

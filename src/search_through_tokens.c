@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:11:41 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/28 05:57:45 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 21:25:37 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	peek_token(t_token *checker, int var_nbr, ...)
 	while (++i < var_nbr)
 	{
 		a = va_arg(ptr, char *);
-		flag = ft_strncmp(token, a, ft_strlen(a));
+		flag = ft_strcmp(token, a);
 		if (flag == 0 && (checker->placing == DEFAULT))
 			return (1);
 	}

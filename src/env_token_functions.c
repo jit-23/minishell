@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:13:49 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 17:21:14 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 21:26:43 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static char	*get_exit_code_var(int option)
 {
 	char	*dollar;
 
+	dollar = NULL;
 	if (option == 2)
 	{
 		dollar = (char *)malloc(sizeof(char) * 3);
@@ -75,7 +76,7 @@ int	valid_env(char *env_var, t_env *env_head)
 		return (0);
 	while (head)
 	{
-		if (ft_strncmp(env_var, head->env_name, ft_strlen(env_var)) == 0)
+		if (ft_strcmp(env_var, head->env_name) == 0)
 			return (1);
 		head = head->next;
 	}
@@ -92,7 +93,7 @@ char	*expand_env_var(char *env_var, t_env *head)
 	env_var++;
 	while (tmp)
 	{
-		if (ft_strncmp(env_var, tmp->env_name, ft_strlen(env_var)) == 0)
+		if (ft_strcmp(env_var, tmp->env_name) == 0)
 			return (ft_strdup(tmp->env_value));
 		tmp = tmp->next;
 	}

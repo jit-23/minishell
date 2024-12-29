@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:30:54 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 14:47:21 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/29 23:14:28 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	ft_export(t_shell *sh, t_exec *ex)
 		}
 		else if (ex->args[i])
 		{
-			manage_var(sh, ex->args[i], ex->args[i + 2]);
+			printf("ex->args[i] - .%s.\n", ex->args[i]);
+			manage_var(sh, ex->args[i], NULL);
 			i++;
 		}
 	}
