@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 19:02:49 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 14:45:21 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:59:25 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	signal_child_handler(int sign)
 {
 	if (sign == SIGINT)
 	{
-		g_sign = 130;
 		write(1, "\n", 1);
+		g_sign = 130;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		exit(g_sign);

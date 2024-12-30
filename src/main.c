@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:08:42 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/30 15:38:55 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:46:15 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	get_prompt(t_shell *shell)
 
 	dir = NULL;
 	dir = getcwd(dir, 100);
-	shell->prompt = ft_strjoin(dir, "MINISHELL$ ");
+	shell->prompt = ft_strjoin(dir, "$> ");
 	shell->cmd_line = readline(shell->prompt);
 	if (shell->cmd_line && shell->cmd_line[0] != 0)
 		add_history(shell->cmd_line);

@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 01:44:38 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/30 07:01:28 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:10:45 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ void	get_tkn_aux(t_shell *sh, t_exec *exec, int i, t_cmd *branch)
 	get_through_token(sh);
 	if (exec->args[i - 1][ft_strlen(exec->args[i - 1]) - 1] == 't'
 		&& exec->args[i - 1][ft_strlen(exec->args[i - 1]) - 2] == 'a'
-		&& exec->args[i - 1][ft_strlen(exec->args[i - 1]) - 3] == 'c'
-		&& exec->args[i - 1][ft_strlen(exec->args[i - 1]) - 4] == '/')
+		&& exec->args[i - 1][ft_strlen(exec->args[i - 1]) - 3] == 'c')
 		exec->args[i] = execute_heredoc(branch, sh->rl->head->token, sh);
 	else
 		free(execute_heredoc(branch, sh->rl->head->token, sh));
@@ -43,7 +42,10 @@ int	get_tkn(int i, t_exec *exec, t_cmd *branch, t_shell *sh)
 		else if (is_builtin(token))
 			exec->args[i] = ft_strdup(token);
 		else if (is_possible_path(token))
+		{
+			exec->cmd = ft_strdup(token);
 			exec->args[i] = ft_strdup(token);
+		}
 		else
 			get_tkn_aux2(i, exec, token, sh);
 	}

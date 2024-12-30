@@ -21,7 +21,10 @@ int	parse_tokens(t_shell *shell, char *cmdl)
 	shell->heredoc_flag = 0;
 	analise_cmdl(shell, place, 0, shell->cmd_line);
 	if (check_syntax(shell))
+	{
+		g_sign = 1;
 		return (1);
+	}
 	refine_token_list(shell);
 	return (0);
 }

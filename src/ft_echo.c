@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:48:47 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/30 08:36:51 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:51:44 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,18 @@ void	ft_echo(t_shell *sh, t_exec *ex)
 void	print_echo_flags(t_shell *sh, t_exec *ex, int i)
 {
 	int	start;
-
 	(void)sh;
 	start = i;
 	while (ex->args[i])
 	{
 		if (ex->args[i][0] == '$' && ex->args[i][1] == '?'
-			&& ex->args[i][0] == '\0')
+			&& ex->args[i][2] == '\0')
 			ft_putnbr_fd(g_sign, 1);
 		ft_putstr_fd(1, ex->args[i]);
 		if (ex->args[i + 1])
+		{
 			ft_putstr_fd(1, " ");
+		}
 		i++;
 	}
 	if (start == 1)
