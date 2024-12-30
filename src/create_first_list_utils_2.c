@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/02 16:22:12 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 17:19:35 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 05:48:56 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int	get_env_var_aux(t_shell *sh, char *env_var, t_placing placing,
 		char *expanded_var)
 {
 	expanded_var = NULL;
-	printf("ENV_VAR - .%s.\n", env_var);
 	if (env_var[0] == '$' && env_var[1] == '\0')
 	{
 		expanded_var = ft_strdup(env_var);

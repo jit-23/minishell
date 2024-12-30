@@ -44,10 +44,12 @@ SRC_FILES:=  main.c \
 					execute_pipe.c\
 					execute_cmd.c\
 					ft_export_utils.c\
+					ft_export_utils1.c\
 					main_utils.c \
 					init_AST_exec_struct_utils.c\
 					execute_cmd_error.c\
-					heredoc_writing.c
+					heredoc_writing.c\
+					check_syntax_utils.c
 MAKE:= make -C
 LIBFT_DIR:= includes/libft
 LIBFT:= includes/libft/libft.a
@@ -94,5 +96,4 @@ re : fclean all
 
 .PHONY: all re clean fclean normi
 .SIELNT:
-
 

@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/03 05:59:56 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 21:42:18 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:39:30 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ int						count_word_size_heredoc(char *cmdl, int i, t_shell *sh,
 							t_placing placing);
 /* ANALISE.C */
 void					analise_terminal_input(t_shell *shell, char *cmdline);
-void					parse_tokens(t_shell *shell, char *cmdl);
+int						parse_tokens(t_shell *shell, char *cmdl);
 void					print_tree(t_cmd *root);
 void					delete_tree(t_cmd *root);
 int						get_equal(t_shell *sh, t_placing place);
@@ -416,8 +416,7 @@ void					run_pipe_aux(t_shell *sh, int fd[2], t_pipe *pp,
 void					start_tree_run(t_shell *sh);
 void					get_tkn_aux2(int i, t_exec *exec, char *token,
 							t_shell *sh);
-void					get_tkn_aux1(t_cmd *branch,
-							t_shell *sh);
+void					get_tkn_aux1(t_cmd *branch, t_shell *sh);
 void					get_tkn_aux3(t_shell *sh);
 void					get_through_token(t_shell *sh);
 t_token					*get_prev(t_shell *sh);
@@ -429,5 +428,14 @@ void					get_tkn_aux(t_shell *sh, t_exec *exec, int i,
 							t_cmd *branch);
 t_env					*search_hdc_var(t_shell *sh, char *env_var);
 void					write_line(t_shell *sh, char *line, int fd);
+int						look_front_back(t_token *tmp, int fb);
+int						is_redir_type(t_token *token);
+int						look_for_redir(t_token *tmp, int fb);
+void					handle_q(t_shell *sh);
+int						check_pipe_sequence(t_token *token);
+int						check_export_str(char *str);
+char					*get_n(const char *exprt, int length);
+char					*get_v(const char *exprt, int start, int length);
+int						divide_it(t_shell *sh, const char *exprt);
 
 #endif

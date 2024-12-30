@@ -6,61 +6,69 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:30:54 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 23:14:28 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:35:47 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	insert_var(t_shell *sh, char *a, char *c)
+char	*get_n(const char *exprt, int length)
 {
-	t_env	*new;
-	t_env	*last;
+	int		i;
+	char	*name;
 
-	new = sh->ev;
-	while (new->next)
-		new = new->next;
-	last = new;
-	new->next = malloc(sizeof(t_env));
-	new = new->next;
-	new->env_name = ft_strdup(a);
-	if (!c)
-		new->env_value = ft_strdup("");
-	else
-		new->env_value = ft_strdup(c);
-	new->next = NULL;
-	new->prev = last;
-	new->index = -1;
-	new->displayed = 0;
+	i = 0;
+	name = (char *)malloc(sizeof(char) * (length + 1));
+	if (!name)
+		return (NULL);
+	while (i < length)
+	{
+		name[i] = exprt[i];
+		i++;
+	}
+	name[length] = '\0';
+	return (name);
 }
 
-static int	check_export_str(char *str)
+char	*get_v(const char *exprt, int start, int length)
 {
-	int	i;
+	int		i;
+	char	*value;
 
-	i = -1;
-	if (ft_isdigit(str[0]))
-		return (1);
-	while (str[++i])
-		if (str[i] == '-' || str[i] == '+' || str[i] == '=')
-			return (1);
+	i = 0;
+	value = (char *)malloc(sizeof(char) * (length + 1));
+	while (i < length)
+	{
+		value[i] = exprt[start + i];
+		i++;
+	}
+	value[length] = '\0';
+	return (value);
+}
+
+int	divide_it(t_shell *sh, const char *exprt)
+{
+	int		i;
+	char	*name;
+	char	*value;
+
+	i = 0;
+	name = NULL;
+	value = NULL;
+	while (exprt[i] && exprt[i] != '=')
+		i++;
+	name = get_n(exprt, i);
+	if (!name)
+		return (0);
+	if (!exprt[i] || exprt[i] != '=')
+		return (manage_var(sh, name, NULL), free(name), 0);
+	value = get_v(exprt, i + 1, strlen(exprt) - (i + 1));
+	if (!value)
+		return (free(name), 9);
+	manage_var(sh, name, value);
+	free(name);
+	free(value);
 	return (0);
-}
-
-void	manage_var(t_shell *sh, char *name, char *value)
-{
-	if (search_var(sh, name))
-		delete_var(sh, name);
-	insert_var(sh, name, value);
-}
-
-void	ft_export_error_msg(t_shell *sh, char *msg)
-{
-	(void)sh;
-	ft_putstr_fd(2, "export: ");
-	ft_putstr_fd(2, msg);
-	ft_putstr_fd(2, " : not a valid identifier\n");
-	g_sign = 1;
 }
 
 int	ft_export(t_shell *sh, t_exec *ex)
@@ -74,20 +82,9 @@ int	ft_export(t_shell *sh, t_exec *ex)
 	{
 		if (check_export_str(ex->args[i]))
 			return (ft_export_error_msg(sh, ex->args[i]), 1);
-		if (ex->args[i] && (ex->args[i + 1] && ex->args[i + 1][0] == '='))
-		{
-			manage_var(sh, ex->args[i], ex->args[i + 2]);
-			if (ex->args[2])
-				i += 3;
-			else
-				break ;
-		}
-		else if (ex->args[i])
-		{
-			printf("ex->args[i] - .%s.\n", ex->args[i]);
-			manage_var(sh, ex->args[i], NULL);
-			i++;
-		}
+		if (ex->args[i])
+			divide_it(sh, ex->args[i]);
+		i++;
 	}
 	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-void	parse_tokens(t_shell *shell, char *cmdl)
+int	parse_tokens(t_shell *shell, char *cmdl)
 {
 	t_placing	place;
 
@@ -20,7 +20,10 @@ void	parse_tokens(t_shell *shell, char *cmdl)
 	place = DEFAULT;
 	shell->heredoc_flag = 0;
 	analise_cmdl(shell, place, 0, shell->cmd_line);
+	if (check_syntax(shell))
+		return (1);
 	refine_token_list(shell);
+	return (0);
 }
 
 void	analise_terminal_input(t_shell *shell, char *cmdline)
@@ -28,8 +31,7 @@ void	analise_terminal_input(t_shell *shell, char *cmdline)
 	shell->cmd_line = ft_strtrim(shell->cmd_line, " ");
 	if (cmdline[0] == '\0')
 		return ;
-	parse_tokens(shell, cmdline);
-	if (check_syntax(shell))
+	if (parse_tokens(shell, cmdline))
 		return ;
 	if (!shell->rl->official_head)
 		return ;
@@ -37,15 +39,7 @@ void	analise_terminal_input(t_shell *shell, char *cmdline)
 	return ;
 }
 
-int	get_equal(t_shell *sh, t_placing place)
-{
-	char	*equal;
-
-	equal = ft_strdup("=");
-	add_to_list(sh->token_list, equal, EQUAL, place);
-	return (1);
-}
-/* 
+/*
 void	print_tree(t_cmd *root)
 {
 	static int j;

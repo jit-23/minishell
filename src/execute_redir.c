@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 20:57:42 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/28 08:12:41 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:10:50 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,12 @@ void	run_redir(t_shell *sh, t_redir *redir)
 	file = get_file(sh, redir);
 	if (file < 0)
 	{
-		ft_putstr_fd(2, "Permission denied:\n");
+		ft_putstr_fd(2, redir->file);
+		ft_putstr_fd(2, " :Permission denied");
+		ft_putstr_fd(2, "\n");
 		delete_all(sh);
+		if (sh->ev)
+			delete_env_lst(sh->ev, lst_size_env(sh->ev));
 		g_sign = 1;
 		exit(g_sign);
 	}
@@ -71,6 +75,4 @@ void	run_redir(t_shell *sh, t_redir *redir)
 			run_tree(sh, NULL);
 		run_tree(sh, (t_cmd *)redir->cmd);
 	}
-	else
-		printf("NO\n");
 }

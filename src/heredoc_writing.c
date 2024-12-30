@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 16:54:28 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 18:00:51 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 05:53:53 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	open_hdoc_file(char *file_name, t_shell *sh)
 	if (fd < 0)
 	{
 		ft_putstr_fd(2, "Permission denied:\n");
+		ft_putstr_fd(2, file_name);
+		ft_putstr_fd(2, "\n");
 		delete_all(sh);
 		exit(126);
 	}

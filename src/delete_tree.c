@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 06:13:01 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 21:42:59 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 05:48:47 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ void	delete_pipe(t_pipe *pp)
 void	delete_redir(t_redir *redir)
 {
 	if (redir->mode == 3)
-	{
-		printf("rd\n");
 		free(redir->file);
-	}
 	free(redir);
 }
 

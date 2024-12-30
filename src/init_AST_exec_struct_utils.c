@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 07:24:54 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 21:43:55 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 09:24:23 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	get_tkn_aux2(int i, t_exec *exec, char *token, t_shell *sh)
 		exec->cmd = get_right_path(token, sh, exec);
 	}
 	else
+	{
+		exec->cmd = ft_strdup(token);
 		exec->args[i] = ft_strdup(token);
+	}
 }
 
 void	get_tkn_aux1(t_cmd *branch, t_shell *sh)

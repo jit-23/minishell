@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 17:08:42 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 22:50:02 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:38:55 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,21 @@ void	get_prompt(t_shell *shell)
 
 void	get_path_env(t_shell *shell, char **envp)
 {
-	int	i;
+	t_env	*ev;
+	char	*strs;
 
-	i = -1;
+	(void)envp;
+	ev = NULL;
+	strs = NULL;
 	shell->path = NULL;
-	while (envp[++i] != NULL)
+	ev = search_env_var(shell, "PATH");
+	if (!ev)
 	{
-		if (ft_strncmp(envp[i], "PATH=", 4) == 0)
-		{
-			shell->path = ft_split(&envp[i][5], ':');
-			break ;
-		}
+		shell->path = NULL;
+		return ;
 	}
+	strs = ev->env_value;
+	shell->path = ft_split(strs, ':');
 }
 
 void	init_shell(t_shell *shell, char **ev)

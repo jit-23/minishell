@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 04:17:33 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 12:17:24 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:34:51 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ void	analise_cmdl(t_shell *shell, t_placing place, int i, char *cmdl)
 			i += get_pipe(shell, place);
 		else if (cmdl[i] && (cmdl[i] == '>' || cmdl[i] == '<'))
 			i += get_redirect_var(cmdl, i, shell, place);
-		else if (cmdl[i] && !special_char(cmdl[i]) && !is_space(cmdl[i]))
+		else if (cmdl[i] && (!special_char(cmdl[i]) || place != 2)
+			&& !is_space(cmdl[i]))
 			i += get_word(cmdl, i, shell, place);
-		else if (cmdl[i] && (cmdl[i] == '='))
-			i += get_equal(shell, place);
 	}
 }
 

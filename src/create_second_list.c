@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 04:46:05 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 16:02:25 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2024/12/30 15:36:11 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ void	handle_word_token(t_shell *sh)
 
 int	check_quote_condition(t_shell *sh)
 {
-	if ((sh->token_list->head->type == S_QUOTE && \
-		sh->token_list->head->placing == DEFAULT) \
-		|| (sh->token_list->head->type == D_QUOTE \
-		&& sh->token_list->head->placing == DEFAULT))
+	if ((sh->token_list->head->type == S_QUOTE
+			&& sh->token_list->head->placing == DEFAULT)
+		|| (sh->token_list->head->type == D_QUOTE
+			&& sh->token_list->head->placing == DEFAULT))
 		return (1);
 	return (0);
 }
@@ -94,7 +94,7 @@ void	refine_token_list(t_shell *sh)
 		else if (sh->token_list->head->type == ENV)
 			handle_word_token(sh);
 		else if (check_quote_condition(sh))
-			sh->token_list->head = sh->token_list->head->next;
+			handle_q(sh);
 		else if (sh->token_list->head->type == PIPE)
 			handle_token(sh, "|");
 		else if (sh->token_list->head->type == REDIR_IN)
@@ -105,7 +105,5 @@ void	refine_token_list(t_shell *sh)
 			handle_token(sh, "<<");
 		else if (sh->token_list->head->type == _APPEND)
 			handle_token(sh, ">>");
-		else if (sh->token_list->head->type == EQUAL)
-			handle_token(sh, "=");
 	}
 }
