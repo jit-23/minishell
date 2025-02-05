@@ -6,7 +6,7 @@
 /*   By: fde-jesu <fde-jesu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 21:52:23 by fde-jesu          #+#    #+#             */
-/*   Updated: 2024/12/29 23:15:13 by fde-jesu         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:55:46 by fde-jesu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,18 @@ void	go_home(t_shell *sh)
 	old_pwd = NULL;
 	old_pwd = getcwd(old_pwd, 100);
 	target = search_env_var(sh, "HOME");
-	home = target->env_value;
-	if (chdir(home) != 0)
+	if (target)
 	{
-		ft_putstr_fd(2, "cd : ");
-		ft_putstr_fd(2, home);
-		ft_putstr_fd(2, ": No such file or directory\n");
-		g_sign = 1;
-		free(old_pwd);
-		return ;
+		home = target->env_value;
+		if (chdir(home) != 0)
+		{
+			ft_putstr_fd(2, "cd : ");
+			ft_putstr_fd(2, home);
+			ft_putstr_fd(2, ": No such file or directory\n");
+			g_sign = 1;
+			free(old_pwd);
+			return ;
+		}
 	}
 	g_sign = 0;
 	update_pwds(sh, old_pwd);
